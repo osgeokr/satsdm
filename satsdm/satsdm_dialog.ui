@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SatSDMDialog</class>
+ <widget class="QDialog" name="SatSDMDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>453</width>
+    <height>782</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SatSDM - Satellite-Derived Species Distribution Model</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <item>
+    <widget class="QTabWidget" name="main_tab">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_input">
+      <attribute name="title">
+       <string>Model Input</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="inputLayout">
+       <item>
+        <widget class="QGroupBox" name="occurrenceGroup">
+         <property name="title">
+          <string>Presence Data</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <widget class="QTabWidget" name="occurrence_tab">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="tab_gbif">
+             <attribute name="title">
+              <string>From GBIF</string>
+             </attribute>
+             <layout class="QVBoxLayout">
+              <item>
+               <layout class="QFormLayout">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_species">
+                  <property name="text">
+                   <string>Species Name:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="gbif_species_input">
+                  <property name="placeholderText">
+                   <string>Enter Scientific Name</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_country">
+                  <property name="text">
+                   <string>Country Code:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="gbif_country_input">
+                  <property name="placeholderText">
+                   <string>e.g., 'KR' for the Korea (the Republic of)</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QPushButton" name="gbif_download_button">
+                <property name="text">
+                 <string>Fetch Data</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="gbif_result_output">
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="placeholderText">
+                 <string>GBIF download status and results will appear here...</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_file">
+             <attribute name="title">
+              <string>From File</string>
+             </attribute>
+             <layout class="QHBoxLayout">
+              <item>
+               <widget class="QLineEdit" name="occurrence_file_input"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="browse_occurrence_button">
+                <property name="text">
+                 <string>Browse</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="envGroup">
+         <property name="title">
+          <string>Environmental Layers</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <widget class="QListWidget" name="env_layers_list"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QPushButton" name="add_env_button">
+              <property name="text">
+               <string>Add Layer</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="remove_env_button">
+              <property name="text">
+               <string>Remove Selected Layer</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout">
+         <item>
+          <layout class="QHBoxLayout">
+           <item>
+            <widget class="QLabel" name="outputDirLabel">
+             <property name="text">
+              <string>Output Folder:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="output_dir_input"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="browse_output">
+             <property name="text">
+              <string>Browse</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_layers">
+      <attribute name="title">
+       <string>SD Layers</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="envAutoLayout">
+       <item>
+        <widget class="QGroupBox" name="group_satellite_indices">
+         <property name="title">
+          <string>Spectral Layer from Satellite Images</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLineEdit" name="satellite_folder_input"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="satellite_folder_button">
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QComboBox" name="satellite_combo">
+            <item>
+             <property name="text">
+              <string>KOMPSAT-3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sentinel-2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Landsat</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_ndvi">
+            <property name="text">
+             <string>Normalized Difference Vegetation Index</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_gndvi">
+            <property name="text">
+             <string>Green Normalized Difference Vegetation Index</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_ndwi_mcfeeters">
+            <property name="text">
+             <string>Normalized Difference Water Index (McFeeters, 1996)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_ndwi_gao">
+            <property name="text">
+             <string>Normalized Difference Water Index (Gao, 1996)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_ndbi">
+            <property name="text">
+             <string>Normalized Difference Built-up Index</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_savi">
+            <property name="text">
+             <string>Soil-Adjusted Vegetation Index</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_bai">
+            <property name="text">
+             <string>Burned Area Index</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="satellite_run_button">
+            <property name="text">
+             <string>Run</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="group_dem_variables">
+         <property name="title">
+          <string>Terrain Layer from DEM</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLineEdit" name="terrain_folder_input"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="terrain_folder_button">
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_slope">
+            <property name="text">
+             <string>Slope</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_aspect">
+            <property name="text">
+             <string>Aspect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="check_tpi">
+            <property name="text">
+             <string>Topographic Position Index</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="terrain_run_button">
+            <property name="text">
+             <string>Run</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="group_proximity_layer">
+         <property name="title">
+          <string>Proximity Layer from Land Cover</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLineEdit" name="proximity_folder_input"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="proximity_folder_button">
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label_proximity_field">
+              <property name="text">
+               <string>Select LC Field:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_proximity_field"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label_proximity_value">
+              <property name="text">
+               <string>Select LC Value:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_proximity_value"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="proximity_run_button">
+            <property name="text">
+             <string>Run</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_model">
+      <attribute name="title">
+       <string>Model Manager</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QGroupBox" name="maxent_feature_group">
+         <property name="title">
+          <string>Feature Types</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <widget class="QCheckBox" name="feature_linear">
+            <property name="text">
+             <string>Linear</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="feature_hinge">
+            <property name="text">
+             <string>Hinge</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="feature_product">
+            <property name="text">
+             <string>Product</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="feature_threshold">
+            <property name="text">
+             <string>Threshold</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="regularization_group">
+         <property name="title">
+          <string>Regularization Parameters</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Beta Multiplier:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="beta_multiplier">
+              <property name="minimum">
+               <double>0.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>2.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Beta Hinge:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="beta_hinge">
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Beta LQP:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="beta_lqp">
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Beta Threshold:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="beta_threshold">
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Beta Categorical:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="beta_categorical">
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="advanced_group">
+         <property name="title">
+          <string>Advanced Options</string>
+         </property>
+         <layout class="QVBoxLayout">
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QCheckBox" name="clamp_checkbox">
+              <property name="text">
+               <string>Clamp feature ranges</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Prevalence (tau):</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="tau_spinbox">
+              <property name="minimum">
+               <double>0.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Transform:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="transform_combo">
+              <item>
+               <property name="text">
+                <string>cloglog</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>logistic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>raw</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Convergence Tolerance:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="tolerance_spinbox">
+              <property name="decimals">
+               <number>8</number>
+              </property>
+              <property name="value">
+               <double>0.000002000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Use Lambdas:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="lambda_combo">
+              <item>
+               <property name="text">
+                <string>best</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>last</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Number of Lambdas:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="lambda_spinbox">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="singleStep">
+               <number>1</number>
+              </property>
+              <property name="value">
+               <number>100</number>
+              </property>
+			 </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Class Weights:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="class_weights_spinbox">
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="singleStep">
+               <number>1</number>
+              </property>
+              <property name="value">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_results">
+      <attribute name="title">
+       <string>Model Report</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QTextEdit" name="results_summary">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Evaluation summary (AUC, ROC, etc.) will appear here...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="roc_image">
+         <property name="text">
+          <string>ROC curve image placeholder</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="run_button">
+     <property name="text">
+      <string>Run Maxent</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

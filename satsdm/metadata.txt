@@ -1,0 +1,17 @@
+[general]
+name=SatSDM
+email=bhyu@knps.or.kr
+author=Byeonghyeok Yu, ChungHyeon Oh, SooDong Lee, JeongHo Lee
+qgisMinimumVersion=3.22
+qgisMaximumVersion=3.99
+description=Satellite-Derived Species Distribution Model 
+about=The SatSDM is a QGIS plugin designed to facilitate species distribution modeling using satellite imagery and environmental data. It enables users to analyze vegetation indices, terrain features, and land cover proximity, and perform modeling using Maxent. This tool is intended for researchers and practitioners working on biodiversity conservation, ecological modeling, and remote sensing analysis. With an intuitive interface, SatSDM allows for seamless integration of satellite data (e.g., KOMPSAT, Sentinel, Landsat) and provides outputs that assist in species habitat prediction and environmental assessment.
+version=1.0.0
+homepage=https://github.com/osgeokr/satsdm
+tracker=https://github.com/osgeokr/satsdm/issues
+repository=https://github.com/osgeokr/satsdm.git
+category=Plugins
+tags=kompsat,sentinel,landsat,sdm,qgis
+icon=logo.png
+experimental=False
+deprecated=False
